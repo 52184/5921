@@ -1,12 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+#include <iostream> 
+#include <cstdlib> 
+#include <ctime>  
+ 
+ 
+ 
+int main() 
+{ 
+    int a; 
+    int b; 
+    std::cout << "vvedite razmer massiva \n"; 
+    std::cin >> a; 
+    int* numbers = new int[a]; 
+    int count = 0; 
+ 
+    srand(time(NULL)); 
+    for (int i = 0; i < a; i++) 
+    { 
+        int b; 
+        b = rand() % 10; 
+        if (b <= 4) { 
+            numbers[i] = rand() % 10; 
+        } 
+        if (b == 5) { 
+            numbers[i] = 0; 
+        } 
+        if(b>5){ 
+            numbers[i] = (rand() % 10 /2) - rand()%10; 
+        } 
+    } 
+ 
+        std::cout << "masiv zapolnenui elementami ot 0 do 9 \n"; 
+ 
+        for (int i = 0; i < a;i++) { 
+            std::cout << numbers[i] << ","; 
+        } 
+     
+     
+ 
+    for (int i = 0; i < a; ++i) 
+    { 
+        int j; 
+        for (j = i + 1; j < a && numbers[j] != numbers[i]; ++j); 
+        count += j == a; 
+    } 
+        std::cout << "\n"; 
+        std::cout << "kolichestvo raznih elementov= " << count << std::endl; 
+ 
+ 
+        for (int startIndex = 0; startIndex < a - 1; ++startIndex) 
+        { 
+            int smallestIndex = startIndex; 
+            for (int currentIndex = startIndex + 1; currentIndex < a; ++currentIndex) 
+            { 
+                if (numbers[currentIndex] > numbers[smallestIndex]) 
+                    smallestIndex = currentIndex; 
+            } 
+            std::swap(numbers[startIndex], numbers[smallestIndex]); 
+        } 
+ 
+        std::cout << "otsortirovanui masiv \n"; 
+ 
+        for (int i = 0; i < a;i++) { 
+            std::cout << numbers[i] << ","; 
+        } 
+         
+        return 0; 
+}
